@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<robot>
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+    </plugin>
+  </gazebo>
+
+  <!--gazebo reference="waist">
+    <gravity>true</gravity>
+    <sensor name="imu_sensor" type="imu">
+      <always_on>true</always_on>
+      <update_rate>100</update_rate>
+      <visualize>true</visualize>
+      <topic>imu_data</topic>
+      <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+        <topicName>imu</topicName>
+        <bodyName>imu</bodyName>
+        <updateRateHZ>10.0</updateRateHZ>
+        <gaussianNoise>0.0</gaussianNoise>
+        <xyzOffset>0 0 0</xyzOffset>
+        <rpyOffset>0 0 0</rpyOffset>
+        <frameName>waist</frameName>
+      </plugin>
+      <pose>0 0 0 0 0 0</pose>
+    </sensor>
+  </gazebo>
+
+  <gazebo reference="imu">
+      <material>Gazebo/Red</material>
+  </gazebo-->
+
+
+  <gazebo reference="waist">
+      <material>Gazebo/Orange</material>
+  </gazebo>
+
+
+  <gazebo reference="hipl1">
+      <material>Gazebo/Black</material>
+  </gazebo>
+  <gazebo reference="hipl2">
+      <material>Gazebo/Black</material>
+  </gazebo>
+  <gazebo reference="hipl3">
+      <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="hipr1">
+      <material>Gazebo/Black</material>
+  </gazebo>
+  <gazebo reference="hipr2">
+      <material>Gazebo/Black</material>
+  </gazebo>
+  <gazebo reference="hipr3">
+      <material>Gazebo/Black</material>
+  </gazebo>
+
+
+  <gazebo reference="thighl">
+      <material>Gazebo/Orange</material>
+  </gazebo>
+  <gazebo reference="thighr">
+      <material>Gazebo/Orange</material>
+  </gazebo>
+
+
+  <gazebo reference="kneel">
+      <material>Gazebo/Black</material>
+  </gazebo>
+  <gazebo reference="kneer">
+      <material>Gazebo/Black</material>
+  </gazebo>
+
+
+  <gazebo reference="shankl">
+      <material>Gazebo/Orange</material>
+  </gazebo>
+  <gazebo reference="shankr">
+      <material>Gazebo/Orange</material>
+  </gazebo>
+
+
+  <gazebo reference="anklel1">
+      <material>Gazebo/Black</material>
+  </gazebo>
+  <gazebo reference="anklel2">
+      <material>Gazebo/Black</material>
+  </gazebo>
+  <gazebo reference="ankler1">
+      <material>Gazebo/Black</material>
+  </gazebo>
+  <gazebo reference="ankler2">
+      <material>Gazebo/Black</material>
+  </gazebo>
+
+
+  <gazebo reference="footl">
+      <material>Gazebo/Orange</material>
+  </gazebo>
+  <gazebo reference="footr">
+      <material>Gazebo/Orange</material>
+  </gazebo>
+
+</robot>

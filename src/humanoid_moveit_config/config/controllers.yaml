@@ -1,0 +1,19 @@
+  controller_manager_ns: ''
+  controller_list:
+    - name: humanoid/body
+      action_ns: follow_joint_trajectory
+      type: FollowJointTrajectory
+      default: true
+        joints:
+	      - hipl1_joint
+	      - hipl2_joint
+	      - hipl3_joint
+	      - kneel_joint
+	      - anklel1_joint
+	      - anklel2_joint
+	      - hipr1_joint
+	      - hipr2_joint
+	      - hipr3_joint
+	      - kneer_joint
+	      - ankler1_joint
+	      - ankler2_joint

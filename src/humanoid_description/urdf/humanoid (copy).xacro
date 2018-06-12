@@ -1,0 +1,265 @@
+<?xml version='1.0'?>
+
+<robot name="humanoid" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find humanoid_description)/urdf/humanoid.gazebo" />
+  <xacro:include filename="$(find humanoid_description)/urdf/materials.xacro" />
+  <xacro:include filename="$(find humanoid_description)/urdf/macros.xacro" />
+
+  <link name='waist'>
+    <inertial>
+      <mass value="10.0"/>
+      <origin xyz="0.0 0.0 0.5" rpy=" 0 0 0"/>
+      <inertia
+          ixx="0.5" ixy="0" ixz="0"
+          iyy="1.0" iyz="0"
+          izz="0.1"
+      />
+    </inertial>
+    <collision name='collision'>
+      <origin xyz="0.0 0.0 0.5" rpy=" 0 0 0"/>
+      <geometry>
+        <box size=".2 .5 .8"/>
+      </geometry>
+    </collision>
+    <visual name='foot_visual'>
+      <origin xyz="0.0 0.0 0.5" rpy=" 0 0 0"/>
+      <geometry>
+        <box size=".2 .4 .8"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <link name="hip">
+    <!--origin xyz="0.1 -0.13 0.1" rpy="0 1.5707 1.5707"/-->
+    <collision name="collision">
+      <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.1"/>
+      </geometry>
+    </collision>
+    <visual name="hip_visual">
+      <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.1"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
+      <mass value="1"/>
+      <cylinder_inertia m="1" r="0.05" h="0.1"/>
+      <inertia
+        ixx="1.0" ixy="0.0" ixz="0.0"
+        iyy="1.0" iyz="0.0"
+        izz="1.0"/>
+    </inertial>
+  </link>
+
+  <link name='thigh'>
+    <inertial>
+      <mass value="10.0"/>
+      <origin xyz="0.0 0.0 0.51" rpy=" 0 0 0"/>
+      <inertia
+          ixx="0.5" ixy="0" ixz="0"
+          iyy="1.0" iyz="0"
+          izz="0.1"
+      />
+    </inertial>
+    <collision name='collision'>
+      <origin xyz="0.0 0.0 0.51" rpy=" 0 0 0"/>
+      <geometry>
+        <box size=".1 .1 0.8"/>
+      </geometry>
+    </collision>
+    <visual name='thigh_visual'>
+      <origin xyz="0.0 0.0 0.51" rpy=" 0 0 0"/>
+      <geometry>
+        <box size=".1 .1 0.8"/>
+      </geometry>
+    </visual>
+  </link>
+
+
+  <!--link name="knee">
+    <collision name="collision">
+      <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.1"/>
+      </geometry>
+    </collision>
+    <visual name="knee_visual">
+      <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.1"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
+      <mass value="1"/>
+      <cylinder_inertia m="1" r="0.05" h="0.1"/>
+      <inertia
+        ixx="1.0" ixy="0.0" ixz="0.0"
+        iyy="1.0" iyz="0.0"
+        izz="1.0"/>
+    </inertial>
+  </link-->
+
+  <link name='shank'>
+    <inertial>
+      <mass value="10.0"/>
+      <origin xyz="0.0 0.0 0.51" rpy=" 0 0 0"/>
+      <inertia
+          ixx="0.5" ixy="0" ixz="0"
+          iyy="1.0" iyz="0"
+          izz="0.1"
+      />
+    </inertial>
+    <collision name='collision'>
+      <origin xyz="0.0 0.0 0.51" rpy=" 0 0 0"/>
+      <geometry>
+        <box size=".1 .1 0.8"/>
+      </geometry>
+    </collision>
+    <visual name='shank_visual'>
+      <origin xyz="0.0 0.0 0.51" rpy=" 0 0 0"/>
+      <geometry>
+        <box size=".1 .1 0.8"/>
+      </geometry>
+    </visual>
+  </link>
+
+
+  <link name="ankle">
+    <!--origin xyz="0.1 -0.13 0.1" rpy="0 1.5707 1.5707"/-->
+    <collision name="collision">
+      <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.1"/>
+      </geometry>
+    </collision>
+    <visual name="ankle_visual">
+      <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.1"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
+      <mass value="1"/>
+      <cylinder_inertia m="1" r="0.05" h="0.1"/>
+      <inertia
+        ixx="1.0" ixy="0.0" ixz="0.0"
+        iyy="1.0" iyz="0.0"
+        izz="1.0"/>
+    </inertial>
+  </link>
+
+  <!--link name="anklel">
+    <collision name="collision">
+      <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.1"/>
+      </geometry>
+    </collision>
+    <visual name="anklel_visual">
+      <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.1"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
+      <mass value="1"/>
+      <cylinder_inertia m="1" r="0.05" h="0.1"/>
+      <inertia
+        ixx="1.0" ixy="0.0" ixz="0.0"
+        iyy="1.0" iyz="0.0"
+        izz="1.0"/>
+    </inertial>
+  </link-->
+
+  <link name='foot'>
+    <inertial>
+      <mass value="10.0"/>
+      <origin xyz="0.1 0.0 0.0" rpy=" 0 0 0"/>
+      <inertia
+          ixx="0.5" ixy="0" ixz="0"
+          iyy="1.0" iyz="0"
+          izz="0.1"
+      />
+    </inertial>
+    <collision name='collision'>
+      <origin xyz="0.1 0.0 0.0" rpy=" 0 0 0"/>
+      <geometry>
+        <box size=".4 .2 .1"/>
+      </geometry>
+    </collision>
+    <visual name='foot_visual'>
+      <origin xyz="0.1 0.0 0.0" rpy=" 0 0 0"/>
+      <geometry>
+        <box size=".4 .2 .1"/>
+      </geometry>
+    </visual>
+  </link>
+
+
+  <!--lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll           joints 1         lllllllllllllllllllllllllllllllllllllllll/-->
+  <joint name="waist_joint" type="revolute">
+    <axis xyz="1 0 0"/>
+    <limit effort="1000.0" lower="-0.5" upper="0.5" velocity="0.0"/>
+    <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+    <parent link="hip"/>
+    <child link="waist"/>
+  </joint>
+
+  <joint name="hip_joint" type="revolute">
+    <axis xyz="0 1 0"/>
+    <limit effort="1000.0" lower="-0.5" upper="0.5" velocity="0.0"/>
+    <origin rpy="0 0 0" xyz="0.0 0.0 1.0"/>
+    <parent link="thigh"/>
+    <child link="hip"/>
+  </joint>
+
+  <joint name="knee_joint" type="revolute">
+    <axis xyz="0 1 0"/>
+    <limit effort="1000.0" lower="-1.57" upper="0.0" velocity="0.0"/>
+    <origin rpy="0 0 0" xyz="0.0 0.0 1.0"/>
+    <parent link="shank"/>
+    <child link="thigh"/>
+  </joint>
+
+  <joint name="ankle_joint" type="revolute">
+    <axis xyz="0 1 0"/>
+    <limit effort="1000.0" lower="-0.4" upper="0.4" velocity="0.0"/>
+    <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+    <parent link="ankle"/>
+    <child link="shank"/>
+  </joint>
+
+  <joint name="anklel_joint" type="revolute">
+    <axis xyz="1 0 0"/>
+    <limit effort="1000.0" lower="-0.4" upper="0.4" velocity="0.0"/>
+    <origin rpy="0 0 0" xyz="0.0 0.0 0.1"/>
+    <parent link="foot"/>
+    <child link="ankle"/>
+  </joint>
+
+  <!--joint name="ankle_jo" type="fixed">
+    <origin rpy="0 0 0" xyz="0.0 0.0 0.1"/>
+    <parent link="foot"/>
+    <child link="anklel"/>
+  </joint>
+
+  <joint name="knee_jo" type="fixed">
+    <origin rpy="0 0 0" xyz="0.0 0.0 1.0"/>
+    <parent link="shank"/>
+    <child link="knee"/>
+  </joint>
+
+  <joint name="hip_jo" type="fixed">
+    <origin rpy="0 0 0" xyz="0.0 0.0 1.0"/>
+    <parent link="thigh"/>
+    <child link="hip"/>
+  </joint-->
+  <!--lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll           second leg         lllllllllllllllllllllllllllllllllllllllll/-->
+</robot>

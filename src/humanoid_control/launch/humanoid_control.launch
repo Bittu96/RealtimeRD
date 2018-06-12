@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- Load joint controller configurations from YAML file to parameter server -->
+  <rosparam file="$(find humanoid_control)/config/humanoid_control.yaml" command="load"/>
+
+  <!-- load the controllers -->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+    output="screen" args="joint_state_controller
+					 hiplroll_position_controller 
+					 hiprroll_position_controller 
+
+					 hiplpitch_position_controller 
+					 hiprpitch_position_controller 
+
+					 kneelpitch_position_controller
+					 kneerpitch_position_controller
+
+					 anklelpitch_position_controller
+					 anklerpitch_position_controller
+
+					 anklelroll_position_controller
+					 anklerroll_position_controller "/>
+  <node name="controller" pkg="controller_manager" type="controller_manager" respawn="false"
+    output="screen" args="spawn          joint_state_controller
+					 hiplroll_position_controller 
+					 hiprroll_position_controller 
+
+					 hiplpitch_position_controller 
+					 hiprpitch_position_controller 
+
+					 kneelpitch_position_controller
+					 kneerpitch_position_controller
+
+					 anklelpitch_position_controller
+					 anklerpitch_position_controller
+
+					 anklelroll_position_controller
+					 anklerroll_position_controller "/>
+
+  <!-- convert joint states to TF transforms for rviz, etc -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+    respawn="false" output="screen">
+    <remap from="/joint_states" to="/humanoid/joint_states" />
+  </node>
+
+</launch>
