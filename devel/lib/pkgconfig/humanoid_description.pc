@@ -1,0 +1,8 @@
+prefix=/home/bittu/humanoid_ws/devel
+
+Name: humanoid_description
+Description: Description of humanoid_description
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/bittu/humanoid_ws/devel/lib 
+Requires: 

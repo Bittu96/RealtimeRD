@@ -1,0 +1,8 @@
+prefix=/home/bittu/humanoid_ws/devel
+
+Name: humanoid_control
+Description: Description of humanoid_control
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/bittu/humanoid_ws/devel/lib 
+Requires: 

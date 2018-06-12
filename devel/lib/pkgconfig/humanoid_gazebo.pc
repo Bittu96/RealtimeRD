@@ -1,0 +1,8 @@
+prefix=/home/bittu/humanoid_ws/devel
+
+Name: humanoid_gazebo
+Description: Description of humanoid_gazebo
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/bittu/humanoid_ws/devel/lib 
+Requires: 
