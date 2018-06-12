@@ -1,0 +1,171 @@
+<?xml version="1.0" ?>
+<!--This does not replace URDF, and is not an extension of URDF.
+    This is a format for representing semantic information about the robot structure.
+    A URDF file must exist for this robot as well, where the joints and the links that are referenced are defined
+-->
+<robot name="humanoid">
+    <!--GROUPS: Representation of a set of joints and links. This can be useful for specifying DOF to plan for, defining arms, end effectors, etc-->
+    <!--LINKS: When a link is specified, the parent joint of that link (if it exists) is automatically included-->
+    <!--JOINTS: When a joint is specified, the child link of that joint (which will always exist) is automatically included-->
+    <!--CHAINS: When a chain is specified, all the links along the chain (including endpoints) are included in the group. Additionally, all the joints that are parents to included links are also included. This means that joints along the chain and the parent joint of the base link are included in the group-->
+    <!--SUBGROUPS: Groups can also be formed by referencing to already defined group names-->
+    <group name="body">
+        <link name="waist" />
+        <link name="hipl1" />
+        <link name="hipl2" />
+        <link name="hipl3" />
+        <link name="thighl" />
+        <link name="kneel" />
+        <link name="shankl" />
+        <link name="anklel1" />
+        <link name="anklel2" />
+        <link name="footl" />
+        <link name="hipr1" />
+        <link name="hipr2" />
+        <link name="hipr3" />
+        <link name="thighr" />
+        <link name="kneer" />
+        <link name="shankr" />
+        <link name="ankler1" />
+        <link name="ankler2" />
+        <link name="footr" />
+        <link name="imu" />
+        <joint name="hipl1_joint" />
+        <joint name="hipl2_joint" />
+        <joint name="hipl3_joint" />
+        <joint name="thighl_joint" />
+        <joint name="kneel_joint" />
+        <joint name="shankl_joint" />
+        <joint name="anklel1_joint" />
+        <joint name="anklel2_joint" />
+        <joint name="footl_joint" />
+        <joint name="hipr1_joint" />
+        <joint name="hipr2_joint" />
+        <joint name="hipr3_joint" />
+        <joint name="thighr_joint" />
+        <joint name="kneer_joint" />
+        <joint name="shankr_joint" />
+        <joint name="ankler1_joint" />
+        <joint name="ankler2_joint" />
+        <joint name="footr_joint" />
+        <joint name="imu_joint" />
+        <chain base_link="footr" tip_link="footl" />
+    </group>
+    <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
+    <group_state name="step" group="body">
+        <joint name="anklel1_joint" value="0.397" />
+        <joint name="anklel2_joint" value="0" />
+        <joint name="ankler1_joint" value="-0.4953" />
+        <joint name="ankler2_joint" value="0" />
+        <joint name="hipl1_joint" value="0" />
+        <joint name="hipl2_joint" value="0" />
+        <joint name="hipl3_joint" value="-0.397" />
+        <joint name="hipr1_joint" value="0" />
+        <joint name="hipr2_joint" value="0.018" />
+        <joint name="hipr3_joint" value="0.3362" />
+        <joint name="kneel_joint" value="0" />
+        <joint name="kneer_joint" value="-0.2143" />
+    </group_state>
+    <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
+    <virtual_joint name="world" type="floating" parent_frame="footr_world" child_link="footr" />
+    <!--PASSIVE JOINT: Purpose: this element is used to mark joints that are not actuated-->
+    <passive_joint name="hipr1_joint" />
+    <passive_joint name="hipl1_joint" />
+    <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
+    <disable_collisions link1="anklel1" link2="anklel2" reason="Adjacent" />
+    <disable_collisions link1="anklel1" link2="footl" reason="Never" />
+    <disable_collisions link1="anklel1" link2="hipl3" reason="Never" />
+    <disable_collisions link1="anklel1" link2="kneel" reason="Never" />
+    <disable_collisions link1="anklel1" link2="shankl" reason="Adjacent" />
+    <disable_collisions link1="anklel1" link2="thighl" reason="Never" />
+    <disable_collisions link1="anklel2" link2="footl" reason="Adjacent" />
+    <disable_collisions link1="anklel2" link2="hipl3" reason="Never" />
+    <disable_collisions link1="anklel2" link2="kneel" reason="Never" />
+    <disable_collisions link1="anklel2" link2="shankl" reason="Never" />
+    <disable_collisions link1="anklel2" link2="thighl" reason="Never" />
+    <disable_collisions link1="ankler1" link2="ankler2" reason="Adjacent" />
+    <disable_collisions link1="ankler1" link2="footr" reason="Never" />
+    <disable_collisions link1="ankler1" link2="hipr3" reason="Never" />
+    <disable_collisions link1="ankler1" link2="kneer" reason="Never" />
+    <disable_collisions link1="ankler1" link2="shankr" reason="Adjacent" />
+    <disable_collisions link1="ankler1" link2="thighr" reason="Never" />
+    <disable_collisions link1="ankler2" link2="footr" reason="Adjacent" />
+    <disable_collisions link1="ankler2" link2="hipr3" reason="Never" />
+    <disable_collisions link1="ankler2" link2="kneer" reason="Never" />
+    <disable_collisions link1="ankler2" link2="shankr" reason="Never" />
+    <disable_collisions link1="ankler2" link2="thighr" reason="Never" />
+    <disable_collisions link1="footl" link2="kneel" reason="Never" />
+    <disable_collisions link1="footl" link2="shankl" reason="Never" />
+    <disable_collisions link1="footl" link2="thighl" reason="Never" />
+    <disable_collisions link1="footr" link2="kneer" reason="Never" />
+    <disable_collisions link1="footr" link2="shankr" reason="Never" />
+    <disable_collisions link1="footr" link2="thighr" reason="Never" />
+    <disable_collisions link1="hipl1" link2="hipl2" reason="Adjacent" />
+    <disable_collisions link1="hipl1" link2="hipl3" reason="Never" />
+    <disable_collisions link1="hipl1" link2="hipr1" reason="Never" />
+    <disable_collisions link1="hipl1" link2="hipr2" reason="Never" />
+    <disable_collisions link1="hipl1" link2="hipr3" reason="Never" />
+    <disable_collisions link1="hipl1" link2="imu" reason="Never" />
+    <disable_collisions link1="hipl1" link2="kneel" reason="Never" />
+    <disable_collisions link1="hipl1" link2="kneer" reason="Never" />
+    <disable_collisions link1="hipl1" link2="shankl" reason="Never" />
+    <disable_collisions link1="hipl1" link2="thighl" reason="Never" />
+    <disable_collisions link1="hipl1" link2="thighr" reason="Never" />
+    <disable_collisions link1="hipl1" link2="waist" reason="Adjacent" />
+    <disable_collisions link1="hipl2" link2="hipl3" reason="Adjacent" />
+    <disable_collisions link1="hipl2" link2="hipr1" reason="Never" />
+    <disable_collisions link1="hipl2" link2="hipr2" reason="Never" />
+    <disable_collisions link1="hipl2" link2="hipr3" reason="Never" />
+    <disable_collisions link1="hipl2" link2="imu" reason="Never" />
+    <disable_collisions link1="hipl2" link2="kneel" reason="Never" />
+    <disable_collisions link1="hipl2" link2="kneer" reason="Never" />
+    <disable_collisions link1="hipl2" link2="shankl" reason="Never" />
+    <disable_collisions link1="hipl2" link2="thighl" reason="Never" />
+    <disable_collisions link1="hipl2" link2="waist" reason="Never" />
+    <disable_collisions link1="hipl3" link2="hipr1" reason="Never" />
+    <disable_collisions link1="hipl3" link2="hipr2" reason="Never" />
+    <disable_collisions link1="hipl3" link2="hipr3" reason="Never" />
+    <disable_collisions link1="hipl3" link2="imu" reason="Never" />
+    <disable_collisions link1="hipl3" link2="kneel" reason="Never" />
+    <disable_collisions link1="hipl3" link2="kneer" reason="Never" />
+    <disable_collisions link1="hipl3" link2="shankl" reason="Never" />
+    <disable_collisions link1="hipl3" link2="thighl" reason="Adjacent" />
+    <disable_collisions link1="hipl3" link2="waist" reason="Never" />
+    <disable_collisions link1="hipr1" link2="hipr2" reason="Adjacent" />
+    <disable_collisions link1="hipr1" link2="hipr3" reason="Never" />
+    <disable_collisions link1="hipr1" link2="imu" reason="Never" />
+    <disable_collisions link1="hipr1" link2="kneel" reason="Never" />
+    <disable_collisions link1="hipr1" link2="kneer" reason="Never" />
+    <disable_collisions link1="hipr1" link2="shankr" reason="Never" />
+    <disable_collisions link1="hipr1" link2="thighl" reason="Never" />
+    <disable_collisions link1="hipr1" link2="thighr" reason="Never" />
+    <disable_collisions link1="hipr1" link2="waist" reason="Adjacent" />
+    <disable_collisions link1="hipr2" link2="hipr3" reason="Adjacent" />
+    <disable_collisions link1="hipr2" link2="imu" reason="Never" />
+    <disable_collisions link1="hipr2" link2="kneel" reason="Never" />
+    <disable_collisions link1="hipr2" link2="kneer" reason="Never" />
+    <disable_collisions link1="hipr2" link2="shankr" reason="Never" />
+    <disable_collisions link1="hipr2" link2="thighr" reason="Never" />
+    <disable_collisions link1="hipr2" link2="waist" reason="Never" />
+    <disable_collisions link1="hipr3" link2="imu" reason="Never" />
+    <disable_collisions link1="hipr3" link2="kneel" reason="Never" />
+    <disable_collisions link1="hipr3" link2="kneer" reason="Never" />
+    <disable_collisions link1="hipr3" link2="shankr" reason="Never" />
+    <disable_collisions link1="hipr3" link2="thighr" reason="Adjacent" />
+    <disable_collisions link1="hipr3" link2="waist" reason="Never" />
+    <disable_collisions link1="imu" link2="kneel" reason="Never" />
+    <disable_collisions link1="imu" link2="kneer" reason="Never" />
+    <disable_collisions link1="imu" link2="shankl" reason="Never" />
+    <disable_collisions link1="imu" link2="shankr" reason="Never" />
+    <disable_collisions link1="imu" link2="thighl" reason="Never" />
+    <disable_collisions link1="imu" link2="thighr" reason="Never" />
+    <disable_collisions link1="imu" link2="waist" reason="Adjacent" />
+    <disable_collisions link1="kneel" link2="shankl" reason="Adjacent" />
+    <disable_collisions link1="kneel" link2="thighl" reason="Adjacent" />
+    <disable_collisions link1="kneel" link2="waist" reason="Never" />
+    <disable_collisions link1="kneer" link2="shankr" reason="Adjacent" />
+    <disable_collisions link1="kneer" link2="thighr" reason="Adjacent" />
+    <disable_collisions link1="kneer" link2="waist" reason="Never" />
+    <disable_collisions link1="thighl" link2="waist" reason="Never" />
+    <disable_collisions link1="thighr" link2="waist" reason="Never" />
+</robot>

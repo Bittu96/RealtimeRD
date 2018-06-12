@@ -1,0 +1,804 @@
+<?xml version='1.0'?>
+
+<robot name="humanoid" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find humanoid_description)/urdf/humanoid.gazebo" />
+  <xacro:include filename="$(find humanoid_description)/urdf/materials.xacro" />
+  <xacro:include filename="$(find humanoid_description)/urdf/macros.xacro"    />
+<!--lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll           sensors         lllllllllllllllllllllllllllllllllllllllll/-->
+ 
+ <!--link name='imu'>
+    <inertial>
+      <mass value="1.0"/>
+      <origin xyz="0.0 0.0 2.6" rpy=" 0 0 0"/>
+      <inertia
+          ixx="0.5" ixy="0" ixz="0"
+          iyy="1.0" iyz="0"
+          izz="0.1"
+      />
+    </inertial>
+    <collision name='collision'>
+      <origin xyz="0.0 0.0 2.6" rpy=" 0 0 0"/>
+      <geometry>
+        <box size=".1 .1 .1"/>
+      </geometry>
+    </collision>
+    <visual name='waist_visual'>
+      <origin xyz="0.0 0.0 2.6" rpy=" 0 0 0"/>
+      <geometry>
+        <box size=".1 .1 .1"/>
+      </geometry>
+    </visual>
+  </link-->
+
+  <!--lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll     sensors fixed joints    lllllllllllllllllllllllllllllllllllllllll/-->
+  
+  <!--joint name="imu_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <parent link="waist"/>
+    <child link="imu"/>
+  </joint-->
+
+<!--lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll     waist_world fixed joint     lllllllllllllllllllllllllllllllllllllllll/-->
+
+ <!--link name='world'/>
+ <link name='dummy_link'/>
+ <joint name="world_fixed" type="fixed">
+     <parent link="world"/>
+     <child link="dummy_link"/>
+     <origin rpy="0 0 0" xyz="0 0 -2.6"/>
+ </joint>
+ <joint name="dummy_joint" type="fixed">
+     <parent link="dummy_link"/>
+     <child link="waist"/>
+     <origin rpy="0 0 0" xyz="0 0 -2.6"/>
+ </joint-->
+
+<!--lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll           waist         lllllllllllllllllllllllllllllllllllllllll/-->
+ 
+ <link name='waist'>
+    <inertial>
+      <mass value="10.0"/>
+      <origin xyz="0.0 0.0 2.6" rpy=" 0 0 0"/>
+      <inertia
+          ixx="0.5" ixy="0" ixz="0"
+          iyy="1.0" iyz="0"
+          izz="0.1"
+      />
+    </inertial>
+    <collision name='collision'>
+      <origin xyz="0.0 0.0 2.6" rpy=" 0 0 0"/>
+      <geometry>
+        <box size=".2 .5 .8"/>
+      </geometry>
+    </collision>
+    <visual name='waist_visual'>
+      <origin xyz="0.0 0.0 2.6" rpy=" 0 0 0"/>
+      <geometry>
+        <box size=".2 .4 .8"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <!--lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll   hip yaw joints       lllllllllllllllllllllllllllllllllllllllll/-->
+  
+  <joint name="hiplyaw_joint" type="revolute">
+    <axis xyz="0 0 1"/>
+    <limit effort="1000.0" lower="-1.5707" upper="1.5707" velocity="0.0"/>
+    <origin rpy="0 0 0" xyz="0 -0.2 2.2"/>
+    <parent link="waist"/>
+    <child link="hipl1"/>
+  </joint>
+
+  <joint name="hipryaw_joint" type="revolute">
+    <axis xyz="0 0 1"/>
+    <limit effort="1000.0" lower="-1.5707" upper="1.5707" velocity="0.0"/>
+    <origin rpy="0 0 0" xyz="0 0.2 2.2"/>
+    <parent link="waist"/>
+    <child link="hipr1"/>
+  </joint>
+
+<!--lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll           hip  1         lllllllllllllllllllllllllllllllllllllllll/-->
+  
+  <link name="hipl1">
+    <!--origin xyz="0.1 -0.13 0.1" rpy="0 1.5707 1.5707"/-->
+    <collision name="collision">
+      <origin xyz="0 -0.0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.1"/>
+      </geometry>
+    </collision>
+    <visual name="hipl1_visual">
+      <origin xyz="0 -0.0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.1"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <origin xyz="0 -0.0 0" rpy="0 0 0"/>
+      <mass value="1"/>
+      <cylinder_inertia m="1" r="0.05" h="0.1"/>
+      <inertia
+        ixx="1.0" ixy="0.0" ixz="0.0"
+        iyy="1.0" iyz="0.0"
+        izz="1.0"/>
+    </inertial>
+  </link>
+
+  <link name="hipr1">
+    <!--origin xyz="0.1 -0.13 0.1" rpy="0 1.5707 1.5707"/-->
+    <collision name="collision">
+      <origin xyz="0 0.0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.1"/>
+      </geometry>
+    </collision>
+    <visual name="hipr1_visual">
+      <origin xyz="0 0.0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.1"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <origin xyz="0 0.0 0" rpy="0 0 0"/>
+      <mass value="1"/>
+      <cylinder_inertia m="1" r="0.05" h="0.1"/>
+      <inertia
+        ixx="1.0" ixy="0.0" ixz="0.0"
+        iyy="1.0" iyz="0.0"
+        izz="1.0"/>
+    </inertial>
+  </link>
+
+  <!--lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll     hip roll joints          lllllllllllllllllllllllllllllllllllllllll/-->
+  
+  <joint name="hiplroll_joint" type="revolute">
+    <axis xyz="1 0 0"/>
+    <limit effort="1000.0" lower="-1.5707" upper="1.5707" velocity="0.0"/>
+    <origin rpy="0 0 0" xyz="0 0.0 -0.1"/>
+    <parent link="hipl1"/>
+    <child link="hipl2"/>
+  </joint>
+
+  <transmission name="tran_hipl_roll">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="hiplroll_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_hipl_roll">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <joint name="hiprroll_joint" type="revolute">
+    <axis xyz="1 0 0"/>
+    <limit effort="1000.0" lower="-1.5707" upper="1.5707" velocity="0.0"/>
+    <origin rpy="0 0 0" xyz="0 0.0 -0.1"/>
+    <parent link="hipr1"/>
+    <child link="hipr2"/>
+  </joint>
+
+  <transmission name="tran_hipr_roll">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="hiprroll_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_hipr_roll">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+<!--lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll        hip 2         lllllllllllllllllllllllllllllllllllllllll/-->
+  
+  <link name="hipl2">
+    <!--origin xyz="0.1 -0.13 0.1" rpy="0 1.5707 1.5707"/-->
+    <collision name="collision">
+      <origin xyz="0 -0.0 0" rpy="0 1.5707 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.1"/>
+      </geometry>
+    </collision>
+    <visual name="hipl2_visual">
+      <origin xyz="0 -0.0 0" rpy="0 1.5707 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.1"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <origin xyz="0 -0.0 0" rpy="0 1.5707 0"/>
+      <mass value="1"/>
+      <cylinder_inertia m="1" r="0.05" h="0.1"/>
+      <inertia
+        ixx="1.0" ixy="0.0" ixz="0.0"
+        iyy="1.0" iyz="0.0"
+        izz="1.0"/>
+    </inertial>
+  </link>
+
+  <link name="hipr2">
+    <!--origin xyz="0.1 -0.13 0.1" rpy="0 1.5707 1.5707"/-->
+    <collision name="collision">
+      <origin xyz="0 0.0 0" rpy="0 1.5707 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.1"/>
+      </geometry>
+    </collision>
+    <visual name="hipr2_visual">
+      <origin xyz="0 0.0 0" rpy="0 1.5707 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.1"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <origin xyz="0 0.0 0" rpy="0 1.5707 0"/>
+      <mass value="1"/>
+      <cylinder_inertia m="1" r="0.05" h="0.1"/>
+      <inertia
+        ixx="1.0" ixy="0.0" ixz="0.0"
+        iyy="1.0" iyz="0.0"
+        izz="1.0"/>
+    </inertial>
+  </link>
+
+  <!--lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll    hip pitch  joints          lllllllllllllllllllllllllllllllllllllllll/-->
+  
+  <joint name="hiplpitch_joint" type="revolute">
+    <axis xyz="0 1 0"/>
+    <limit effort="1000.0" lower="-1.5707" upper="1.5707" velocity="0.0"/>
+    <origin rpy="0 0 0" xyz="0 0.0 -0.1"/>
+    <parent link="hipl2"/>
+    <child link="hipl3"/>
+  </joint>
+
+  <transmission name="tran_hipl_pitch">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="hiplpitch_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_hipl_pitch">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <joint name="hiprpitch_joint" type="revolute">
+    <axis xyz="0 1 0"/>
+    <limit effort="1000.0" lower="-1.5707" upper="1.5707" velocity="0.0"/>
+    <origin rpy="0 0 0" xyz="0 0.0 -0.1"/>
+    <parent link="hipr2"/>
+    <child link="hipr3"/>
+  </joint>
+
+  <transmission name="tran_hirl_pitch">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="hiprpitch_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_hipr_pitch">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+<!--lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll           hip 3         lllllllllllllllllllllllllllllllllllllllll/-->
+  
+  <link name="hipl3">
+    <!--origin xyz="0.1 -0.13 0.1" rpy="0 1.5707 1.5707"/-->
+    <collision name="collision">
+      <origin xyz="0 -0.0 0" rpy="1.5707 0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.1"/>
+      </geometry>
+    </collision>
+    <visual name="hipl3_visual">
+      <origin xyz="0 -0.0 0" rpy="1.5707 0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.1"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <origin xyz="0 -0.0 0" rpy="1.5707 0 0"/>
+      <mass value="1"/>
+      <cylinder_inertia m="1" r="0.05" h="0.1"/>
+      <inertia
+        ixx="1.0" ixy="0.0" ixz="0.0"
+        iyy="1.0" iyz="0.0"
+        izz="1.0"/>
+    </inertial>
+  </link>
+
+  <link name="hipr3">
+    <!--origin xyz="0.1 -0.13 0.1" rpy="0 1.5707 1.5707"/-->
+    <collision name="collision">
+      <origin xyz="0 0.0 0" rpy="1.5707 0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.1"/>
+      </geometry>
+    </collision>
+    <visual name="hipr3_visual">
+      <origin xyz="0 0.0 0" rpy="1.5707 0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.1"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <origin xyz="0 0.0 0" rpy="1.5707 0 0"/>
+      <mass value="1"/>
+      <cylinder_inertia m="1" r="0.05" h="0.1"/>
+      <inertia
+        ixx="1.0" ixy="0.0" ixz="0.0"
+        iyy="1.0" iyz="0.0"
+        izz="1.0"/>
+    </inertial>
+  </link>
+
+  <!--lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll      thigh fixed  joints          lllllllllllllllllllllllllllllllllllllllll/-->
+  
+  <joint name="thighl_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0.0 -0.1"/>
+    <parent link="hipl3"/>
+    <child link="thighl"/>
+  </joint>
+
+  <joint name="thighr_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0.0 -0.1"/>
+    <parent link="hipr3"/>
+    <child link="thighr"/>
+  </joint>
+
+<!--lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll           thigh         lllllllllllllllllllllllllllllllllllllllll/-->
+  
+  <link name='thighl'>
+    <inertial>
+      <mass value="10.0"/>
+      <origin xyz="0.0 0.0 -0.3" rpy=" 0 0 0"/>
+      <inertia
+          ixx="0.5" ixy="0" ixz="0"
+          iyy="1.0" iyz="0"
+          izz="0.1"
+      />
+    </inertial>
+    <collision name='collision'>
+      <origin xyz="0.0 0.0 -0.3" rpy=" 0 0 0"/>
+      <geometry>
+        <box size=".1 .1 0.6"/>
+      </geometry>
+    </collision>
+    <visual name='thighl_visual'>
+      <origin xyz="0.0 0.0 -0.3" rpy=" 0 0 0"/>
+      <geometry>
+        <box size=".1 .1 0.6"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <link name='thighr'>
+    <inertial>
+      <mass value="10.0"/>
+      <origin xyz="0.0 0.0 -0.3" rpy=" 0 0 0"/>
+      <inertia
+          ixx="0.5" ixy="0" ixz="0"
+          iyy="1.0" iyz="0"
+          izz="0.1"
+      />
+    </inertial>
+    <collision name='collision'>
+      <origin xyz="0.0 0.0 -0.3" rpy=" 0 0 0"/>
+      <geometry>
+        <box size=".1 .1 0.6"/>
+      </geometry>
+    </collision>
+    <visual name='thighr_visual'>
+      <origin xyz="0.0 0.0 -0.3" rpy=" 0 0 0"/>
+      <geometry>
+        <box size=".1 .1 0.6"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <!--lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll      knee  joints          lllllllllllllllllllllllllllllllllllllllll/-->
+  
+  <joint name="kneelpitch_joint" type="revolute">
+    <axis xyz="0 -1 0"/>
+    <limit effort="1000.0" lower="-3" upper="0" velocity="0.0"/>
+    <origin rpy="0 0 0" xyz="0 0.0 -0.7"/>
+    <parent link="thighl"/>
+    <child link="kneel"/>
+  </joint>
+
+  <transmission name="tran_kneel_pitch">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="kneelpitch_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_kneel_pitch">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <joint name="kneerpitch_joint" type="revolute">
+    <axis xyz="0 -1 0"/>
+    <limit effort="1000.0" lower="-3" upper="0" velocity="0.0"/>
+    <origin rpy="0 0 0" xyz="0 0.0 -0.7"/>
+    <parent link="thighr"/>
+    <child link="kneer"/>
+  </joint>
+
+  <transmission name="tran_kneer_pitch">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="kneerpitch_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_kneer_pitch">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+<!--lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll           knee         lllllllllllllllllllllllllllllllllllllllll/-->
+  
+  <link name="kneel">
+    <!--origin xyz="0.1 -0.13 0.1" rpy="0 1.5707 1.5707"/-->
+    <collision name="collision">
+      <origin xyz="0 -0.0 0" rpy="1.5707 0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.1"/>
+      </geometry>
+    </collision>
+    <visual name="kneel_visual">
+      <origin xyz="0 -0.0 0" rpy="1.5707 0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.1"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <origin xyz="0 -0.0 0" rpy="1.5707 0 0"/>
+      <mass value="1"/>
+      <cylinder_inertia m="1" r="0.05" h="0.1"/>
+      <inertia
+        ixx="1.0" ixy="0.0" ixz="0.0"
+        iyy="1.0" iyz="0.0"
+        izz="1.0"/>
+    </inertial>
+  </link>
+
+  <link name="kneer">
+    <!--origin xyz="0.1 -0.13 0.1" rpy="0 1.5707 1.5707"/-->
+    <collision name="collision">
+      <origin xyz="0 0.0 0" rpy="1.5707 0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.1"/>
+      </geometry>
+    </collision>
+    <visual name="kneer_visual">
+      <origin xyz="0 0.0 0" rpy="1.5707 0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.1"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <origin xyz="0 0.0 0" rpy="1.5707 0 0"/>
+      <mass value="1"/>
+      <cylinder_inertia m="1" r="0.05" h="0.1"/>
+      <inertia
+        ixx="1.0" ixy="0.0" ixz="0.0"
+        iyy="1.0" iyz="0.0"
+        izz="1.0"/>
+    </inertial>
+  </link>
+
+  <!--lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll       shank fixed joints          lllllllllllllllllllllllllllllllllllllllll/-->
+  
+  <joint name="shankl_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0.0 -0.1"/>
+    <parent link="kneel"/>
+    <child link="shankl"/>
+  </joint>
+
+  <joint name="shankr_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0.0 -0.1"/>
+    <parent link="kneer"/>
+    <child link="shankr"/>
+  </joint>
+
+<!--lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll           shank        lllllllllllllllllllllllllllllllllllllllll/-->
+  
+  <link name='shankl'>
+    <inertial>
+      <mass value="10.0"/>
+      <origin xyz="0.0 0.0 -0.3" rpy=" 0 0 0"/>
+      <inertia
+          ixx="0.5" ixy="0" ixz="0"
+          iyy="1.0" iyz="0"
+          izz="0.1"
+      />
+    </inertial>
+    <collision name='collision'>
+      <origin xyz="0.0 0.0 -0.3" rpy=" 0 0 0"/>
+      <geometry>
+        <box size=".1 .1 0.6"/>
+      </geometry>
+    </collision>
+    <visual name='shankl_visual'>
+      <origin xyz="0.0 0.0 -0.3" rpy=" 0 0 0"/>
+      <geometry>
+        <box size=".1 .1 0.6"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <link name='shankr'>
+    <inertial>
+      <mass value="10.0"/>
+      <origin xyz="0.0 0.0 -0.3" rpy=" 0 0 0"/>
+      <inertia
+          ixx="0.5" ixy="0" ixz="0"
+          iyy="1.0" iyz="0"
+          izz="0.1"
+      />
+    </inertial>
+    <collision name='collision'>
+      <origin xyz="0.0 0.0 -0.3" rpy=" 0 0 0"/>
+      <geometry>
+        <box size=".1 .1 0.6"/>
+      </geometry>
+    </collision>
+    <visual name='shankr_visual'>
+      <origin xyz="0.0 0.0 -0.3" rpy=" 0 0 0"/>
+      <geometry>
+        <box size=".1 .1 0.6"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <!--lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll      ankle1  joints          lllllllllllllllllllllllllllllllllllllllll/-->
+  
+  <joint name="anklelpitch_joint" type="revolute">
+    <axis xyz="0 1 0"/>
+    <limit effort="1000.0" lower="-1.5707" upper="1.5707" velocity="0.0"/>
+    <origin rpy="0 0 0" xyz="0 0.0 -0.8"/>
+    <parent link="shankl"/>
+    <child link="anklel1"/>
+  </joint>
+
+  <transmission name="tran_anklel_pitch">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="anklelpitch_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_anklel_pitch">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <joint name="anklerpitch_joint" type="revolute">
+    <axis xyz="0 1 0"/>
+    <limit effort="1000.0" lower="-1.5707" upper="1.5707" velocity="0.0"/>
+    <origin rpy="0 0 0" xyz="0 0.0 -0.8"/>
+    <parent link="shankr"/>
+    <child link="ankler1"/>
+  </joint>
+
+  <transmission name="tran_ankler_pitch">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="anklerpitch_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_ankler_pitch">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+<!--lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll           ankle 1         lllllllllllllllllllllllllllllllllllllllll/-->
+  
+  <link name="anklel1">
+    
+    <collision name="collision">
+      <origin xyz="0 -0.0 0" rpy="1.5707 0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.1"/>
+      </geometry>
+    </collision>
+    <visual name="anklel1_visual">
+      <origin xyz="0 -0.0 0" rpy="1.5707 0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.1"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <origin xyz="0 -0.0 0" rpy="1.5707 0 0"/>
+      <mass value="1"/>
+      <cylinder_inertia m="1" r="0.05" h="0.1"/>
+      <inertia
+        ixx="1.0" ixy="0.0" ixz="0.0"
+        iyy="1.0" iyz="0.0"
+        izz="1.0"/>
+    </inertial>
+  </link>
+
+  <link name="ankler1">
+    
+    <collision name="collision">
+      <origin xyz="0 0.0 0" rpy="1.5707 0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.1"/>
+      </geometry>
+    </collision>
+    <visual name="ankler1_visual">
+      <origin xyz="0 0.0 0" rpy="1.5707 0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.1"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <origin xyz="0 0.0 0" rpy="1.5707 0 0"/>
+      <mass value="1"/>
+      <cylinder_inertia m="1" r="0.05" h="0.1"/>
+      <inertia
+        ixx="1.0" ixy="0.0" ixz="0.0"
+        iyy="1.0" iyz="0.0"
+        izz="1.0"/>
+    </inertial>
+  </link>
+
+  <!--lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll      ankle2  joints          lllllllllllllllllllllllllllllllllllllllll/-->
+  
+  <joint name="anklelroll_joint" type="revolute">
+    <axis xyz="1 0 0"/>
+    <limit effort="1000.0" lower="-1.5707" upper="1.5707" velocity="0.0"/>
+    <origin rpy="0 0 0" xyz="0 0.0 -0.1"/>
+    <parent link="anklel1"/>
+    <child link="anklel2"/>
+  </joint>
+
+  <transmission name="tran_anklel_roll">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="anklelroll_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_anklel_roll">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <joint name="anklerroll_joint" type="revolute">
+    <axis xyz="1 0 0"/>
+    <limit effort="1000.0" lower="-1.5707" upper="1.5707" velocity="0.0"/>
+    <origin rpy="0 0 0" xyz="0 0.0 -0.1"/>
+    <parent link="ankler1"/>
+    <child link="ankler2"/>
+  </joint>
+
+  <transmission name="tran_ankler_roll">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="anklerroll_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_ankler_roll">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+<!--lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll           ankle 2         lllllllllllllllllllllllllllllllllllllllll/-->
+  
+  <link name="anklel2">
+    
+    <collision name="collision">
+      <origin xyz="0 -0.0 0" rpy="0 1.5707 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.1"/>
+      </geometry>
+    </collision>
+    <visual name="anklel2_visual">
+      <origin xyz="0 -0.0 0" rpy="0 1.5707 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.1"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <origin xyz="0 -0.0 0" rpy="0 1.5707 0"/>
+      <mass value="1"/>
+      <cylinder_inertia m="1" r="0.05" h="0.1"/>
+      <inertia
+        ixx="1.0" ixy="0.0" ixz="0.0"
+        iyy="1.0" iyz="0.0"
+        izz="1.0"/>
+    </inertial>
+  </link>
+
+  <link name="ankler2">
+    
+    <collision name="collision">
+      <origin xyz="0 0.0 0" rpy="0 1.5707 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.1"/>
+      </geometry>
+    </collision>
+    <visual name="ankler2_visual">
+      <origin xyz="0 0.0 0" rpy="0 1.5707 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.1"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <origin xyz="0 0.0 0" rpy="0 1.5707 0"/>
+      <mass value="1"/>
+      <cylinder_inertia m="1" r="0.05" h="0.1"/>
+      <inertia
+        ixx="1.0" ixy="0.0" ixz="0.0"
+        iyy="1.0" iyz="0.0"
+        izz="1.0"/>
+    </inertial>
+  </link>
+
+  <!--lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll      feet  fixed joints          lllllllllllllllllllllllllllllllllllllllll/-->
+  
+  <joint name="footl_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0.0 -0.1"/>
+    <parent link="anklel2"/>
+    <child link="footl"/>
+  </joint>
+
+  <joint name="footr_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0.0 -0.1"/>
+    <parent link="ankler2"/>
+    <child link="footr"/>
+  </joint>
+
+<!--lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll           feet         lllllllllllllllllllllllllllllllllllllllll/-->
+  
+ <link name='footl'>
+    <inertial>
+      <mass value="10.0"/>
+      <origin xyz="0.0 0.0 0.0" rpy=" 0 0 0"/>
+      <inertia
+          ixx="0.5" ixy="0" ixz="0"
+          iyy="1.0" iyz="0"
+          izz="0.1"
+      />
+    </inertial>
+    <collision name='collision'>
+      <origin xyz="0.1 0.0 0.0" rpy=" 0 0 0"/>
+      <geometry>
+        <box size=".4 .15 .05"/>
+      </geometry>
+    </collision>
+    <visual name='footl_visual'>
+      <origin xyz="0.1 0.0 0.0" rpy=" 0 0 0"/>
+      <geometry>
+        <box size=".4 .15 .05"/>
+      </geometry>
+    </visual>
+  </link>
+
+ <link name='footr'>
+    <inertial>
+      <mass value="10.0"/>
+      <origin xyz="0.1 0.0 0.0" rpy=" 0 0 0"/>
+      <inertia
+          ixx="0.5" ixy="0" ixz="0"
+          iyy="1.0" iyz="0"
+          izz="0.1"
+      />
+    </inertial>
+    <collision name='collision'>
+      <origin xyz="0.1 0.0 0.0" rpy=" 0 0 0"/>
+      <geometry>
+        <box size=".4 .15 .05"/>
+      </geometry>
+    </collision>
+    <visual name='footr_visual'>
+      <origin xyz="0.1 0.0 0.0" rpy=" 0 0 0"/>
+      <geometry>
+        <box size=".4 .15 .05"/>
+      </geometry>
+    </visual>
+  </link>
+
+</robot>

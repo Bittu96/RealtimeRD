@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<launch>
+
+  <param name="robot_description" command="$(find xacro)/xacro.py '$(find humanoid_description)/urdf/humanoid.xacro'"/>
+
+  <!-- send fake joint values -->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    <param name="use_gui" value="false"/>
+  </node>
+
+  <!-- Combine joint values -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher">
+  <param name="use_gui" value="true"/>
+  </node>
+  <!--node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher"/-->
+  <!--node name="robot_state_publisher" pkg="robot_state_publisher" type="position_controller.py" output="screen" respawn="true" /-->
+
+  <!-- Show in Rviz   -->
+  <!--node name="rviz" pkg="rviz" type="rviz"/-->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find humanoid_description)/launch/humanoid.rviz"/>
+ 
+  <!--node name="joint_state_publisher" pkg="joint_state_publisher" type="pose.py" output="screen" respawn="true" /-->
+  <rosparam file="$(find humanoid_control)/config/humanoid_control.yaml" command="load"/>
+
+
+</launch>

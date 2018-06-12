@@ -1,0 +1,15 @@
+controller_list:
+  - name: fake_body_controller
+    joints:
+      - hipl1_joint
+      - hipl2_joint
+      - hipl3_joint
+      - kneel_joint
+      - anklel1_joint
+      - anklel2_joint
+      - hipr1_joint
+      - hipr2_joint
+      - hipr3_joint
+      - kneer_joint
+      - ankler1_joint
+      - ankler2_joint

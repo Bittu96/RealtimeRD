@@ -1,0 +1,62 @@
+digraph G {
+node [shape=box];
+"waist" [label="waist"];
+"hipl1" [label="hipl1"];
+"hipl2" [label="hipl2"];
+"hipl3" [label="hipl3"];
+"thighl" [label="thighl"];
+"kneel" [label="kneel"];
+"shankl" [label="shankl"];
+"anklel1" [label="anklel1"];
+"anklel2" [label="anklel2"];
+"footl" [label="footl"];
+"hipr1" [label="hipr1"];
+"hipr2" [label="hipr2"];
+"hipr3" [label="hipr3"];
+"thighr" [label="thighr"];
+"kneer" [label="kneer"];
+"shankr" [label="shankr"];
+"ankler1" [label="ankler1"];
+"ankler2" [label="ankler2"];
+"footr" [label="footr"];
+"imu" [label="imu"];
+node [shape=ellipse, color=blue, fontcolor=blue];
+"waist" -> "hipl1_joint" [label="xyz: 0 -0.2 2.2 \nrpy: 0 -0 0"]
+"hipl1_joint" -> "hipl1"
+"hipl1" -> "hipl2_joint" [label="xyz: 0 0 -0.1 \nrpy: 0 -0 0"]
+"hipl2_joint" -> "hipl2"
+"hipl2" -> "hipl3_joint" [label="xyz: 0 0 -0.1 \nrpy: 0 -0 0"]
+"hipl3_joint" -> "hipl3"
+"hipl3" -> "thighl_joint" [label="xyz: 0 0 -0.1 \nrpy: 0 -0 0"]
+"thighl_joint" -> "thighl"
+"thighl" -> "kneel_joint" [label="xyz: 0 0 -0.7 \nrpy: 0 -0 0"]
+"kneel_joint" -> "kneel"
+"kneel" -> "shankl_joint" [label="xyz: 0 0 -0.1 \nrpy: 0 -0 0"]
+"shankl_joint" -> "shankl"
+"shankl" -> "anklel1_joint" [label="xyz: 0 0 -0.8 \nrpy: 0 -0 0"]
+"anklel1_joint" -> "anklel1"
+"anklel1" -> "anklel2_joint" [label="xyz: 0 0 -0.1 \nrpy: 0 -0 0"]
+"anklel2_joint" -> "anklel2"
+"anklel2" -> "footl_joint" [label="xyz: 0 0 -0.1 \nrpy: 0 -0 0"]
+"footl_joint" -> "footl"
+"waist" -> "hipr1_joint" [label="xyz: 0 0.2 2.2 \nrpy: 0 -0 0"]
+"hipr1_joint" -> "hipr1"
+"hipr1" -> "hipr2_joint" [label="xyz: 0 0 -0.1 \nrpy: 0 -0 0"]
+"hipr2_joint" -> "hipr2"
+"hipr2" -> "hipr3_joint" [label="xyz: 0 0 -0.1 \nrpy: 0 -0 0"]
+"hipr3_joint" -> "hipr3"
+"hipr3" -> "thighr_joint" [label="xyz: 0 0 -0.1 \nrpy: 0 -0 0"]
+"thighr_joint" -> "thighr"
+"thighr" -> "kneer_joint" [label="xyz: 0 0 -0.7 \nrpy: 0 -0 0"]
+"kneer_joint" -> "kneer"
+"kneer" -> "shankr_joint" [label="xyz: 0 0 -0.1 \nrpy: 0 -0 0"]
+"shankr_joint" -> "shankr"
+"shankr" -> "ankler1_joint" [label="xyz: 0 0 -0.8 \nrpy: 0 -0 0"]
+"ankler1_joint" -> "ankler1"
+"ankler1" -> "ankler2_joint" [label="xyz: 0 0 -0.1 \nrpy: 0 -0 0"]
+"ankler2_joint" -> "ankler2"
+"ankler2" -> "footr_joint" [label="xyz: 0 0 -0.1 \nrpy: 0 -0 0"]
+"footr_joint" -> "footr"
+"waist" -> "imu_joint" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"imu_joint" -> "imu"
+}

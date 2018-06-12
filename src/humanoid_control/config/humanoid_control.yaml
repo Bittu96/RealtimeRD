@@ -1,0 +1,62 @@
+humanoid:
+
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50  
+
+  hiplroll_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hiplroll_joint
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  hiprroll_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hiprroll_joint
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+
+  hiplpitch_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hiplpitch_joint
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  hiprpitch_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hiprpitch_joint
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+
+  kneelpitch_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: kneelpitch_joint
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  kneerpitch_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: kneerpitch_joint
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+
+
+  anklelpitch_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: anklelpitch_joint
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  anklerpitch_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: anklerpitch_joint
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+
+
+  anklelroll_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: anklelroll_joint
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  anklerroll_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: anklerroll_joint
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+
+
+
+
+
